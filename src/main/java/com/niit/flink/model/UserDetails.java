@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Table
 @Entity
 @Component
-public class checkdo {
+public class UserDetails {
 	
 	@Id
 	private String  username;

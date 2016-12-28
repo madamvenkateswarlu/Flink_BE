@@ -6,17 +6,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.niit.flink.dao.checkingdao;
-import com.niit.flink.model.checkdo;
+import com.niit.flink.dao.UserDao;
+import com.niit.flink.model.UserDetails;
 
 @Controller
-public class CheckingCntrl {
+public class MainCntrl {
 	
 	@Autowired
-	checkingdao cdao;
+	UserDao udao;
 	
 	@Autowired
-	checkdo check;
+	UserDetails userModel;
 	
 	
 	@RequestMapping("/")
@@ -26,14 +26,14 @@ public class CheckingCntrl {
 		
 	}
 	@RequestMapping(value="/entry",method=RequestMethod.POST)
-	public String pushAEntry(@RequestParam("username")String user,@RequestParam("password")String pass){
+	public String pushAEntry(@RequestParam("username")String username,@RequestParam("password")String pass){
 		
-		System.out.println(user+""+pass);
+		System.out.println(username+""+pass);
 		
-		check.setUsername(user);
-		check.setPassword(pass);
+		userModel.setUsername(username);
+		userModel.setPassword(pass);
+		udao.save_check(userModel);
 		
-		cdao.save_check(check);
 		
 		return "index";
 		
