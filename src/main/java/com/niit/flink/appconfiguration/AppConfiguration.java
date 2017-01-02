@@ -5,7 +5,6 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.tool.schema.spi.CommandAcceptanceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,6 +14,7 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.niit.flink.model.Registration;
 import com.niit.flink.model.UserDetails;
 
 @Configuration
@@ -39,9 +39,8 @@ public class AppConfiguration {
 	public Properties getHibernateProperties(){
 		
 		Properties p=new Properties();
-       
-/*			p.setProperty("hibernate.hbm2ddl.auto", "update");
-*/		
+    // p.setProperty("hibernate.hbm2ddl.auto", "update");
+		
 
 		p.put("hibernate.dialect", "org.hibernate.dialect.Oracle10gDialect");
 
@@ -58,7 +57,8 @@ public class AppConfiguration {
 		LocalSessionFactoryBuilder session=new LocalSessionFactoryBuilder(source);
 		session.addProperties(getHibernateProperties());
 		session.addAnnotatedClass(UserDetails.class);
-        System.out.println("session factory Flink");
+		session.addAnnotatedClass(Registration.class);
+		System.out.println("session factory Flink");
 
 	   return session.buildSessionFactory();
 		

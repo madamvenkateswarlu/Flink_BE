@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.niit.flink.dao.UserDao;
+import com.niit.flink.dao.RegisterDao;
 import com.niit.flink.model.UserDetails;
 
 @Controller
 public class MainCntrl {
 	
 	@Autowired
-	UserDao udao;
+	RegisterDao rdao;
 	
 	@Autowired
 	UserDetails userModel;
@@ -32,7 +32,6 @@ public class MainCntrl {
 		
 		userModel.setUsername(username);
 		userModel.setPassword(pass);
-		udao.save_check(userModel);
 		
 		
 		return "index";
