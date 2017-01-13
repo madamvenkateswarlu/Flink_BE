@@ -21,6 +21,9 @@ public class UserController {
 	@Autowired
 	UserDao userdao;
 	
+	@Autowired
+	UserDetails userdetails;
+	
 	//register the user
 	@RequestMapping(value="/registration",method=RequestMethod.POST)
 	public ResponseEntity<UserDetails> register(@RequestBody UserDetails user){
@@ -52,6 +55,41 @@ public class UserController {
 		
 		
 		return new ResponseEntity<UserDetails>(user,HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping(value="/allusers")
+	public ResponseEntity<List<UserDetails>> getAllUsers(){
+		
+	List<UserDetails> users=userdao.get_All_Users();
+	return new ResponseEntity<List<UserDetails>>(users,HttpStatus.OK);
+		
+		
+		
+		
+	}
+	@RequestMapping(value="/loginAuthentication")
+	public ResponseEntity<UserDetails> loginAuthentication(@RequestBody UserDetails user){
+		UserDetails loggedinuser=userdao.login_Authentication(user);
+		        if(loggedinuser!=null){
+		       loggedinuser.setError("Logged in Successfully");
+		       loggedinuser.setCode("200");
+				return new ResponseEntity<UserDetails>(loggedinuser,HttpStatus.OK);
+
+		        }
+		        else{
+		        	loggedinuser=userdetails;
+		        	loggedinuser.setError("Something went wrong");
+				       loggedinuser.setCode("404");
+					return new ResponseEntity<UserDetails>(loggedinuser,HttpStatus.OK);
+
+		        }
+		        
+			     
+
+		
+
+		
 		
 	}
 

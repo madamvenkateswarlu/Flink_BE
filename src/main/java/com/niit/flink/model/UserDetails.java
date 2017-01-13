@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Table
 @Entity
 @Component
-public class UserDetails {
+public class UserDetails extends ErrorMessage {
 	@Id
 	private String username;
 	
@@ -19,6 +19,9 @@ public class UserDetails {
 	private String address;
 	private String mobile;
 	private String role;
+	private String gender;
+	private String dateofbirth;
+	
 	private String password;
 	private String is_online;
 	private String status;
@@ -28,6 +31,18 @@ public class UserDetails {
 	}
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public String getDateofbirth() {
+		return dateofbirth;
+	}
+	public void setDateofbirth(String dateofbirth) {
+		this.dateofbirth = dateofbirth;
 	}
 	public String getEmail() {
 		return email;
