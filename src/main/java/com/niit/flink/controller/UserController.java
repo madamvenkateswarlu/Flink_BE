@@ -27,7 +27,10 @@ public class UserController {
 	//register the user
 	@RequestMapping(value="/registration",method=RequestMethod.POST)
 	public ResponseEntity<UserDetails> register(@RequestBody UserDetails user){
-		
+		user.setError("Registration Successfull");
+		user.setCode("200");
+		user.setIs_online("offline");
+		user.setStatus("waiting");
 		userdao.save_user(user);
 		
 		

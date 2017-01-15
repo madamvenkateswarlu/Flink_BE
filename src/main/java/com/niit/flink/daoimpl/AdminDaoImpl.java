@@ -12,11 +12,8 @@ import com.niit.flink.model.UserDetails;
 @Transactional
 public class AdminDaoImpl implements AdminDao {
 	
-	
 	@Autowired
 	SessionFactory sessionFactory;
-	
-	
 	
 	public AdminDaoImpl(SessionFactory sessionFactory) {
 		this.sessionFactory=sessionFactory;
@@ -30,12 +27,19 @@ public class AdminDaoImpl implements AdminDao {
 		user.setStatus(staus);
 		sessionFactory.getCurrentSession().update(user);
 		
-		}
+		}		
+		return user;
+	}
+
+
+	public UserDetails RoleUpadte(String username, String role) {
 		
+		UserDetails user=(UserDetails) sessionFactory.getCurrentSession().get(UserDetails.class, username);
+		if(user!=null){
+		user.setRole(role);
+		sessionFactory.getCurrentSession().update(user);
 		
-		
-		//String statusql="from Userdetails where username='"+username+"'";
-		
+		}		
 		return user;
 	}
 

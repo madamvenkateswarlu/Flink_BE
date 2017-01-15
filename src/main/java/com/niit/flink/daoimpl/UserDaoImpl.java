@@ -33,7 +33,7 @@ public class UserDaoImpl implements UserDao{
 		sessionFactory.getCurrentSession().save(user);
 		
 	
-		return false;
+		return true;
 	}
 
 	public UserDetails getUpdatingId(String user) {

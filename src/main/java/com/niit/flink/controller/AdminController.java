@@ -37,10 +37,27 @@ public class AdminController {
 				return new ResponseEntity<UserDetails>(user,HttpStatus.OK);
 
 	        }
-	        
+	}
 		     
 
+	@RequestMapping(value="/role/{username}/{role}",method=RequestMethod.GET)
+	public ResponseEntity<UserDetails> roleUpdate(@PathVariable("username")String username,@PathVariable("role")String role){
+		
+	UserDetails user=admindao.RoleUpadte(username, role);
+	if(user!=null){
+	       user.setError(role+"Successfully");
+	       user.setCode("200");
+			return new ResponseEntity<UserDetails>(user,HttpStatus.OK);
 
+	        }
+	        else{
+	        	user=userdetails;
+	        	user.setError("Something went wrong");
+			       user.setCode("404");
+				return new ResponseEntity<UserDetails>(user,HttpStatus.OK);
+
+	        }
+	        
 		
 		
          		
