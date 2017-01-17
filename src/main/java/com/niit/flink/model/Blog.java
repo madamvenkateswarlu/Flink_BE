@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Table
 @Entity
 @Component
-public class Blog{
+public class Blog extends ErrorMessage{
 
 	@Id
 	private String blog_id;

@@ -2,6 +2,8 @@ package com.niit.flink.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -72,11 +74,12 @@ public class UserController {
 		
 	}
 	@RequestMapping(value="/loginAuthentication")
-	public ResponseEntity<UserDetails> loginAuthentication(@RequestBody UserDetails user){
+	public ResponseEntity<UserDetails> loginAuthentication(@RequestBody UserDetails user,HttpSession session ){
 		UserDetails loggedinuser=userdao.login_Authentication(user);
 		        if(loggedinuser!=null){
 		       loggedinuser.setError("Logged in Successfully");
 		       loggedinuser.setCode("200");
+		       session.setAttribute("loggedinUser", loggedinuser);
 				return new ResponseEntity<UserDetails>(loggedinuser,HttpStatus.OK);
 
 		        }
