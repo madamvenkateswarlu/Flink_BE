@@ -3,6 +3,7 @@ package com.niit.flink.daoimpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -33,10 +34,11 @@ public class BlogDaoImpl implements BlogDao{
 
 	public ArrayList<Blog> fetchWithUser(String username) {
 	
+		String hql="from Blog where writtenby='"+username+"'";
+		Query q=sessionFactory.getCurrentSession().createQuery(hql);
+		
 		@SuppressWarnings("unchecked")
-		
-		ArrayList<Blog> blogwithuser=(ArrayList<Blog>) sessionFactory.getCurrentSession().createCriteria(Blog.class,username).list();
-		
+		ArrayList<Blog> blogwithuser=(ArrayList<Blog>) q.list();
 		return blogwithuser;
 	}
 

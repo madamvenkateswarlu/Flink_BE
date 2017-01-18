@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.flink.dao.UserDao;
+import com.niit.flink.model.ErrorMessage;
 import com.niit.flink.model.UserDetails;
 
 @RestController
@@ -90,12 +91,32 @@ public class UserController {
 					return new ResponseEntity<UserDetails>(loggedinuser,HttpStatus.OK);
 
 		        }
-		        
-			     
-
+		        }
+	@RequestMapping(value="/validsession",method=RequestMethod.GET)
+	public ResponseEntity<UserDetails> validsession(HttpSession session){
 		
-
-		
+	       UserDetails user=(UserDetails) session.getAttribute("loggedinUser");
+          
+	       if(user==null){
+	    	   user=userdetails;
+	    	   user.setCode("404");
+	    	   user.setError("session expired");
+	    	   return new ResponseEntity<UserDetails>(user,HttpStatus.OK);
+	       }
+	       else{
+	    	   user.setCode("200");
+	    	   user.setError("user is loggedin");
+	    	   return new ResponseEntity<UserDetails>(user,HttpStatus.OK);
+	       }
+		}
+	@RequestMapping(value="/invalidatesession",method=RequestMethod.GET)
+      public ResponseEntity<UserDetails> invalidate(HttpSession session){
+		session.invalidate();
+		  UserDetails user=userdetails;
+		   user.setCode("200");
+		   user.setError("logged out");
+		  
+    	   return new ResponseEntity<UserDetails>(user,HttpStatus.OK);
 		
 	}
 
