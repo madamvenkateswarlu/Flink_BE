@@ -15,6 +15,7 @@ import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.niit.flink.model.Blog;
+import com.niit.flink.model.Friend;
 import com.niit.flink.model.UserDetails;
 
 
@@ -60,6 +61,7 @@ public class AppConfiguration {
 		session.addProperties(getHibernateProperties());
 		session.addAnnotatedClass(UserDetails.class);
 		session.addAnnotatedClasses(Blog.class);
+		session.addAnnotatedClass(Friend.class);
 		System.out.println("session factory Flink");
 
 	   return session.buildSessionFactory();
