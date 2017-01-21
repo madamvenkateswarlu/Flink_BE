@@ -28,23 +28,37 @@ public class FriendController {
 	@Autowired
 	UserDetails udetails;
 	
-	@RequestMapping(value="friendrequest",method=RequestMethod.POST)
-     public ResponseEntity<Friend> friendRequest(@RequestBody Friend f){
+	@RequestMapping(value="/friendrequest",method=RequestMethod.POST)
+     public ResponseEntity<Friend> friendRequest(@RequestBody Friend f,HttpSession session){
+		udetails=(UserDetails) session.getAttribute("loggedinUser");
+
 		String uid=UUID.randomUUID().toString();
 		f.setId(uid);
+		f.setUserid(udetails.getUsername());
+		f.setStatus("waiting");
 	   fdao.sendRequest(f);
 	return new ResponseEntity<Friend>(f,HttpStatus.OK);
 		
 	}
 	
-	@RequestMapping(value="friends",method=RequestMethod.GET)
-	public ResponseEntity<ArrayList<String>> fetchFriendlist(HttpSession session) {
+	@RequestMapping(value="/friends",method=RequestMethod.GET)
+	public ResponseEntity<ArrayList<Friend>> fetchFriendlist(HttpSession session) {
 		
 		udetails=(UserDetails) session.getAttribute("loggedinUser");
 		
-		ArrayList<String> flist=fdao.fetchFriendList(udetails.getFname());
+		ArrayList<Friend> flist=fdao.objectFriendList(udetails.getUsername());
 		
-		return new ResponseEntity<ArrayList<String>>(flist,HttpStatus.OK);
+		return new ResponseEntity<ArrayList<Friend>>(flist,HttpStatus.OK);
+		
+	}
+	@RequestMapping(value="/newFriendDisplay",method=RequestMethod.GET)
+	public ResponseEntity<ArrayList<String>> fetchFriendDisplay(HttpSession session) {
+		
+		udetails=(UserDetails) session.getAttribute("loggedinUser");
+		
+		ArrayList<String> fdlist=fdao.fetchFriends(udetails.getUsername());
+		
+		return new ResponseEntity<ArrayList<String>>(fdlist,HttpStatus.OK);
 		
 	}
 	

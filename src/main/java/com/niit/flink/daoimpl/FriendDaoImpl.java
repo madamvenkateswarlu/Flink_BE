@@ -47,4 +47,36 @@ public class FriendDaoImpl implements FriendDao {
 		
 	}
 
+	public ArrayList<String> fetchFriends(String userid) {
+		String uhql="select username from UserDetails";
+		Query q=sessionFactory.getCurrentSession().createQuery(uhql);
+		ArrayList<String> allulist=(ArrayList<String>) q.list();
+		
+		
+	ArrayList<String> flist=fetchFriendList(userid);
+                flist.add(userid);
+                allulist.removeAll(flist);
+	         
+		
+		return allulist;
+	}
+
+	
+	public ArrayList<Friend> objectFriendList(String userid){
+		
+		String uhql="from Friend where userid='"+userid+"'";
+		String fhql="from Friend where friendid='"+userid+"'";
+         Query uq=sessionFactory.getCurrentSession().createQuery(uhql);
+         Query fq=sessionFactory.getCurrentSession().createQuery(fhql);
+         
+         @SuppressWarnings("unchecked")
+		ArrayList<Friend> uslist=(ArrayList<Friend>) uq.list();
+         @SuppressWarnings("unchecked")
+		ArrayList<Friend> frlist=(ArrayList<Friend>) fq.list();
+            uslist.addAll(frlist);
+         
+	return uslist;
+		
+	}
+
 }
