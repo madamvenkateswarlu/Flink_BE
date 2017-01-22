@@ -45,9 +45,13 @@ public class FriendController {
 	public ResponseEntity<ArrayList<Friend>> fetchFriendlist(HttpSession session) {
 		
 		udetails=(UserDetails) session.getAttribute("loggedinUser");
-		
+		if(udetails!=null){
 		ArrayList<Friend> flist=fdao.objectFriendList(udetails.getUsername());
-		
+		return new ResponseEntity<ArrayList<Friend>>(flist,HttpStatus.OK);
+
+		}
+		ArrayList<Friend> flist=new ArrayList<Friend>();
+
 		return new ResponseEntity<ArrayList<Friend>>(flist,HttpStatus.OK);
 		
 	}
@@ -55,11 +59,14 @@ public class FriendController {
 	public ResponseEntity<ArrayList<String>> fetchFriendDisplay(HttpSession session) {
 		
 		udetails=(UserDetails) session.getAttribute("loggedinUser");
-		
+		if(udetails!=null){
 		ArrayList<String> fdlist=fdao.fetchFriends(udetails.getUsername());
-		
 		return new ResponseEntity<ArrayList<String>>(fdlist,HttpStatus.OK);
-		
+
+		}
+		ArrayList<String> fdlist=new ArrayList<String>();
+		return new ResponseEntity<ArrayList<String>>(fdlist,HttpStatus.OK);
+
 	}
 	
 }
