@@ -9,5 +9,6 @@ public interface FriendDao {
    public ArrayList<String> fetchFriendList(String userid);
    public ArrayList<String>  fetchFriends(String userid);
    public ArrayList<Friend> objectFriendList(String userid);
+   public Friend  friendStatusUpdate(String friendid,String status);
 
 }
