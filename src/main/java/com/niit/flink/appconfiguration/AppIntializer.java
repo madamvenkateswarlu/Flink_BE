@@ -8,14 +8,14 @@ public class AppIntializer extends AbstractAnnotationConfigDispatcherServletInit
 	protected Class<?>[] getRootConfigClasses() {
 		System.out.println("started rootconfig");
 		
-		return new Class[]{AppViewConfig.class};
+		return new Class[]{AppViewConfig.class,WebSocketConfiguration.class};
 	}
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
 		System.out.println("started servletconfig");
 
-		return new Class[]{AppViewConfig.class};
+		return new Class[]{AppViewConfig.class,WebSocketConfiguration.class};
 	}
 
 	@Override
