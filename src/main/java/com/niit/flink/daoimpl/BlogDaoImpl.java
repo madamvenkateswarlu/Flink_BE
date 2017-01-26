@@ -69,4 +69,12 @@ public class BlogDaoImpl implements BlogDao{
 		return b;
 	}
 
+
+	@SuppressWarnings("unchecked")
+	public ArrayList<Blog> allBlog() {
+		ArrayList<Blog> allBlog=new ArrayList<Blog>();
+	allBlog=(ArrayList<Blog>) sessionFactory.getCurrentSession().createCriteria(Blog.class).list();
+		return allBlog;
+	}
+
 }

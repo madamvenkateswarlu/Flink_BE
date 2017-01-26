@@ -97,7 +97,14 @@ public class BlogController {
 		return new ResponseEntity<Blog>(b,HttpStatus.OK);
 		
 	}
-	
+	@RequestMapping(value="allBlog",method=RequestMethod.GET)
+	public ResponseEntity<ArrayList<Blog>> allBlog(){
+		
+		ArrayList<Blog> b =blogdao.allBlog();
+		
+		return new ResponseEntity<ArrayList<Blog>>(b,HttpStatus.OK);
+		
+	}
 	
 	 }
 

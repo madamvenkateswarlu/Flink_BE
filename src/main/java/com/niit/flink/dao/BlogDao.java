@@ -12,4 +12,5 @@ public interface BlogDao {
 	public Blog deleteBlog(String blog_id);
 	public Blog fetchParticularBlog(String blog_id);
 	public Blog updateBlog(Blog b);
+	public ArrayList<Blog> allBlog();
 }
