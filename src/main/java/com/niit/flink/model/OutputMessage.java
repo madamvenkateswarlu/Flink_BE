@@ -8,6 +8,7 @@ public class OutputMessage extends Message{
 	    
 	public OutputMessage(Message message,Date time) {
 		super(message.getId(),message.getMessage(),message.getUsername());
+
 	}
 
 	public Date getTime() {

@@ -9,6 +9,7 @@ public class Message {
 	private String username;
 	
 	public Message() {
+		
 	}
 	
 	public Message(int id,String message,String username) {
