@@ -69,42 +69,33 @@ public class BlogController {
 	@RequestMapping(value="deleteBlog/{blog_id}",method=RequestMethod.GET)
 	 public ResponseEntity<Blog> deleteBlog(@PathVariable("blog_id")String blog_id,HttpSession session)
 	 {
-
-         
-		         
-		         Blog deleting_blog=blogdao.deleteBlog(blog_id);
-		         deleting_blog.setCode("200");
-	        	 deleting_blog.setError("deleted successfully");
-	        	 
-		         
-		return new ResponseEntity<Blog>(deleting_blog,HttpStatus.OK);
-         
-         
-           }
+      Blog deleting_blog=blogdao.deleteBlog(blog_id);
+      deleting_blog.setCode("200");
+	  deleting_blog.setError("deleted successfully");
+	return new ResponseEntity<Blog>(deleting_blog,HttpStatus.OK);
+         }
    @RequestMapping(value="editBlog/{blog_id}",method=RequestMethod.GET)
    public ResponseEntity<Blog> editBlog(@PathVariable("blog_id")String blog_id){
-	    
-	  Blog b= blogdao.fetchParticularBlog(blog_id);
-	   
-	return new ResponseEntity<Blog>(b,HttpStatus.OK);
+	     Blog b= blogdao.fetchParticularBlog(blog_id);
+	   return new ResponseEntity<Blog>(b,HttpStatus.OK);
 	   
    }
 	
 	@RequestMapping(value="createblog",method=RequestMethod.PUT)
 	public ResponseEntity<Blog> updateBlog(@RequestBody Blog blog,HttpSession session){
-		
-		Blog b=blogdao.updateBlog(blog);
+			Blog b=blogdao.updateBlog(blog);
 		return new ResponseEntity<Blog>(b,HttpStatus.OK);
 		
 	}
+	                /*job applied*/
 	@RequestMapping(value="allBlog",method=RequestMethod.GET)
 	public ResponseEntity<ArrayList<Blog>> allBlog(){
-		
 		ArrayList<Blog> b =blogdao.allBlog();
-		
-		return new ResponseEntity<ArrayList<Blog>>(b,HttpStatus.OK);
+	  return new ResponseEntity<ArrayList<Blog>>(b,HttpStatus.OK);
 		
 	}
+	
+	
 	
 	 }
 
