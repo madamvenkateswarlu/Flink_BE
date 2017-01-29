@@ -1,6 +1,7 @@
 package com.niit.flink.daoimpl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 
 import org.hibernate.Criteria;
@@ -8,6 +9,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,16 +91,22 @@ public class JobDaoImpl implements JobDao{
 	@SuppressWarnings("unchecked")
 	public ArrayList<Job> getJobAppliedWithUsername(String username) {
 		
-		Criteria cr=sessionFactory.getCurrentSession().createCriteria(Jobapplied.class).setProjection(Projections.property("jobid"));
+		ProjectionList p1=Projections.projectionList();
+        p1.add(Projections.property("jobid"));
+        p1.add(Projections.property("status_job"));
+        p1.add(Projections.property("adate"));
+		Criteria cr=sessionFactory.getCurrentSession().createCriteria(Jobapplied.class).setProjection(p1);
 		cr.add(Restrictions.like("username", username));
-		ArrayList<String> list=new ArrayList<String>();
-		list=(ArrayList<String>) cr.list();
-		Iterator<String> iter=list.iterator();
+		ArrayList<Object> list=new ArrayList<Object>();
+		list=(ArrayList<Object>) cr.list();
+		Iterator<Object> iter=list.iterator();
 		ArrayList<Job> objlist=new  ArrayList<Job>();
 		while (iter.hasNext()) {
-		String id=iter.next();
-		Job j =getParticularJob(id);
-		objlist.add(j);
+			Object ob[] = (Object[])iter.next();
+		  Job j =getParticularJob((String) ob[0]);
+		j.setJob_status((String) ob[1]);
+		j.setJob_date((Date) ob[2]);
+	     objlist.add(j);
 		}
 		
 		

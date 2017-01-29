@@ -1,5 +1,7 @@
 package com.niit.flink.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -20,7 +22,7 @@ public class UserDetails extends ErrorMessage {
 	private String mobile;
 	private String role;
 	private String gender;
-	private String dateofbirth;
+	private Date dateofbirth;
 	
 	private String password;
 	private String is_online;
@@ -38,10 +40,10 @@ public class UserDetails extends ErrorMessage {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getDateofbirth() {
+	public Date getDateofbirth() {
 		return dateofbirth;
 	}
-	public void setDateofbirth(String dateofbirth) {
+	public void setDateofbirth(Date dateofbirth) {
 		this.dateofbirth = dateofbirth;
 	}
 	public String getEmail() {

@@ -18,7 +18,6 @@ public class Jobapplied extends ErrorMessage {
 	private String jobid;
 	private Date  adate;
 	private String status_job;
-	public String job;
 	
 	
 	public String getId_job() {
@@ -33,12 +32,7 @@ public class Jobapplied extends ErrorMessage {
 	public void setAdate(Date adate) {
 		this.adate = adate;
 	}
-	public String getJob() {
-		return job;
-	}
-	public void setJob(String b) {
-		this.job = b;
-	}
+	
 	
 	public String getUsername() {
 		return username;

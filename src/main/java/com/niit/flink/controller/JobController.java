@@ -85,8 +85,6 @@ Jobapplied jobap;
             j.setId_job(random_id);
             j.setAdate(date);
           Job b=jdao.getParticularJob(j.getJobid());
-            Gson gson=new Gson();
-             j.setJob(gson.toJson(b));  
         	if(jdao.applyJob(j)){
              j.setCode("200");
         	 j.setError("Job applied successfully");
