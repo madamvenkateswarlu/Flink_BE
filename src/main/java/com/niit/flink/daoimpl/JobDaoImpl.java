@@ -25,6 +25,9 @@ import com.niit.flink.model.Jobapplied;
 @Transactional
 public class JobDaoImpl implements JobDao{
 	
+	@Autowired
+	Jobapplied ja;
+	
 	@Autowired 
 	SessionFactory sessionFactory;
 	public JobDaoImpl(SessionFactory sessionFactory) {
@@ -113,8 +116,16 @@ public class JobDaoImpl implements JobDao{
 		return objlist;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public ArrayList<Jobapplied> allgetJobApplied() {
+		
+		
+		 ArrayList<Jobapplied> jobs=(ArrayList<Jobapplied>) sessionFactory.getCurrentSession().createCriteria(Jobapplied.class).list();
+			
+		return jobs;		
+	}
+	}
 	
 	
 	
 
-}

@@ -115,4 +115,13 @@ Jobapplied jobap;
 		return new ResponseEntity<ArrayList<Job>>(ja,HttpStatus.OK);
 		
 	}
+	@RequestMapping(value="/allJobApplied",method=RequestMethod.GET)
+	public ResponseEntity<ArrayList<Jobapplied>> allAppliedUser(HttpSession session){
+        UserDetails user=(UserDetails) session.getAttribute("loggedinUser");
+
+		ArrayList<Jobapplied> ja=jdao.allgetJobApplied();
+		
+		return new ResponseEntity<ArrayList<Jobapplied>>(ja,HttpStatus.OK);
+		
+	}
 }

@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 @Entity
@@ -19,7 +20,19 @@ public class Jobapplied extends ErrorMessage {
 	private Date  adate;
 	private String status_job;
 	
+	private String jobtitle;
 	
+	@Transient
+	private Job job;
+	
+	
+	
+	public Job getJob() {
+		return job;
+	}
+	public void setJob(Job job) {
+		this.job = job;
+	}
 	public String getId_job() {
 		return id_job;
 	}
@@ -51,6 +64,12 @@ public class Jobapplied extends ErrorMessage {
 	}
 	public void setStatus_job(String status_job) {
 		this.status_job = status_job;
+	}
+	public String getJobtitle() {
+		return jobtitle;
+	}
+	public void setJobtitle(String jobtitle) {
+		this.jobtitle = jobtitle;
 	}
 	
 	
