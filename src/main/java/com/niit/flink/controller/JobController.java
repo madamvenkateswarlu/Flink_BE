@@ -124,4 +124,14 @@ Jobapplied jobap;
 		return new ResponseEntity<ArrayList<Jobapplied>>(ja,HttpStatus.OK);
 		
 	}
+	
+	@RequestMapping(value="/updateJobStatus/{id}/{status}",method=RequestMethod.GET)
+	public ResponseEntity<Jobapplied>  updateStatus(@PathVariable("id")String id,@PathVariable("status")String status){
+          
+		Jobapplied ja=jdao.updateStatus(id, status);
+		
+		return new ResponseEntity<Jobapplied>(ja,HttpStatus.OK);
+		
+	}
+	
 }

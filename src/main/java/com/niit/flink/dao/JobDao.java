@@ -17,6 +17,7 @@ public interface JobDao {
 	public boolean applyJob(Jobapplied ja);
 	public ArrayList<Job> getJobAppliedWithUsername(String username);
 	public ArrayList<Jobapplied> allgetJobApplied();
+	public Jobapplied updateStatus(String id,String status);
 
 	
 

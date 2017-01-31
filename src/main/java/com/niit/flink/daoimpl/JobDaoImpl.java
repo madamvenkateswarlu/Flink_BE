@@ -124,6 +124,13 @@ public class JobDaoImpl implements JobDao{
 			
 		return jobs;		
 	}
+	public Jobapplied updateStatus(String id, String status) {
+		
+	Jobapplied jo=(Jobapplied) sessionFactory.getCurrentSession().get(Jobapplied.class, id);
+		jo.setStatus_job(status);
+		sessionFactory.getCurrentSession().update(jo);
+		return jo;
+	}
 	}
 	
 	
