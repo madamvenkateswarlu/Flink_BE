@@ -1,5 +1,6 @@
 package com.niit.flink.appconfiguration;
 
+
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class AppIntializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -24,5 +25,8 @@ public class AppIntializer extends AbstractAnnotationConfigDispatcherServletInit
 
 		return new String[]{"/"};
 	}
+	
+	 
+
 
 }
