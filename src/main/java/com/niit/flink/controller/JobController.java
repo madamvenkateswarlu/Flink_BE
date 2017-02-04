@@ -109,9 +109,10 @@ Jobapplied jobap;
 	@RequestMapping(value="/userJob",method=RequestMethod.GET)
 	public ResponseEntity<ArrayList<Job>> jobAppliedUser(HttpSession session){
         UserDetails user=(UserDetails) session.getAttribute("loggedinUser");
-
-		ArrayList<Job> ja=jdao.getJobAppliedWithUsername(user.getUsername());
-		
+        ArrayList<Job> ja=new ArrayList<Job>();
+            if(user!=null){
+		 ja=jdao.getJobAppliedWithUsername(user.getUsername());
+            }
 		return new ResponseEntity<ArrayList<Job>>(ja,HttpStatus.OK);
 		
 	}

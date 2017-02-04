@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.niit.flink.dao.UserDao;
+import com.niit.flink.imageupload.ImageUpload;
 import com.niit.flink.model.ErrorMessage;
 import com.niit.flink.model.UserDetails;
 
@@ -25,7 +28,14 @@ public class UserController {
 	UserDao userdao;
 	
 	@Autowired
+	
 	UserDetails userdetails;
+	
+	String name;
+	
+	
+	String path="E:\\flink workspace\\Flink_FE\\WebContent\\Resources\\userimage";
+
 	
 	//register the user
 	@RequestMapping(value="/registration",method=RequestMethod.POST)
@@ -35,11 +45,20 @@ public class UserController {
 		user.setIs_online("offline");
 		user.setStatus("waiting");
 		userdao.save_user(user);
+	
+		name=user.getUsername();
+		
 		
 		
 		return new ResponseEntity<UserDetails>(user,HttpStatus.OK);
 		
 		}
+	
+	
+	
+	
+	
+	
 	//getting particular row from db
 	
 	@RequestMapping("/updating/{email}")
@@ -119,7 +138,7 @@ public class UserController {
     	   return new ResponseEntity<UserDetails>(user,HttpStatus.OK);
 		
 	}
-
+  
 	
 	
 }

@@ -5,8 +5,10 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 @Table
 @Entity
@@ -28,6 +30,17 @@ public class UserDetails extends ErrorMessage {
 	private String is_online;
 	private String status;
 	
+	@Transient
+	private MultipartFile multi;
+	
+	
+	
+	public MultipartFile getMulti() {
+		return multi;
+	}
+	public void setMulti(MultipartFile multi) {
+		this.multi = multi;
+	}
 	public String getUsername() {
 		return username;
 	}

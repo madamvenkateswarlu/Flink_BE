@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
 import com.niit.flink.imageupload.ImageUpload;
 import com.niit.flink.model.UserDetails;
 
@@ -32,10 +33,18 @@ public class ImageUploadingController {
 		
 	
 		return new ResponseEntity<String>("Successful",HttpStatus.OK);
+		}
+	
+	@RequestMapping(value="/registerupload",method=RequestMethod.POST)
+	public ResponseEntity<String> imageRegisterUpload(@RequestPart("file")MultipartFile part_img,@RequestParam("user")String username,HttpSession session){
+		
+		ImageUpload.UploadMethod(path, part_img, username+".jpg");
+	
+	
+		return new ResponseEntity<String>("Successful",HttpStatus.OK);
 		
 		
 	}
-	
 	
 
 }
