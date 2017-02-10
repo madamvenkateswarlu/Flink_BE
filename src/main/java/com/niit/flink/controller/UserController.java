@@ -95,12 +95,13 @@ public class UserController {
 	}
 	@RequestMapping(value="/loginAuthentication")
 	public ResponseEntity<UserDetails> loginAuthentication(@RequestBody UserDetails user,HttpSession session ){
-		UserDetails loggedinuser=userdao.login_Authentication(user);
+		user.setIs_online("online");
+       UserDetails loggedinuser=userdao.login_Authentication(user);
 		        if(loggedinuser!=null){
 		       loggedinuser.setError("Logged in Successfully");
 		       loggedinuser.setCode("200");
 		       session.setAttribute("loggedinUser", loggedinuser);
-				return new ResponseEntity<UserDetails>(loggedinuser,HttpStatus.OK);
+           return new ResponseEntity<UserDetails>(loggedinuser,HttpStatus.OK);
 
 		        }
 		        else{
@@ -118,12 +119,16 @@ public class UserController {
           
 	       if(user==null){
 	    	   user=userdetails;
+				user.setIs_online("offline");
+
 	    	   user.setCode("404");
 	    	   user.setError("session expired");
 	    	   return new ResponseEntity<UserDetails>(user,HttpStatus.OK);
 	       }
 	       else{
 	    	   user.setCode("200");
+				user.setIs_online("online");
+
 	    	   user.setError("user is loggedin");
 	    	   return new ResponseEntity<UserDetails>(user,HttpStatus.OK);
 	       }
@@ -133,6 +138,8 @@ public class UserController {
 		session.invalidate();
 		  UserDetails user=userdetails;
 		   user.setCode("200");
+			user.setIs_online("offline");
+
 		   user.setError("logged out");
 		  
     	   return new ResponseEntity<UserDetails>(user,HttpStatus.OK);

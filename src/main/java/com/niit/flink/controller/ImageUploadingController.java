@@ -45,6 +45,17 @@ public class ImageUploadingController {
 		
 		
 	}
+	@RequestMapping(value="/coverupload",method=RequestMethod.POST)
+public ResponseEntity<String> coverUpload(@RequestPart("file")MultipartFile part_img,HttpSession session){
+		
+		UserDetails user=(UserDetails) session.getAttribute("loggedinUser");
+		
+		
+		ImageUpload.UploadMethod(path, part_img, user.getUsername()+"_cover"+".jpg");
+		
+	
+		return new ResponseEntity<String>("Successful",HttpStatus.OK);
+		}
 	
 
 }
